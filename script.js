@@ -25,7 +25,7 @@ function getData() {
 			channel: { link: channel.href, name: channel.innerText },
 			title: video.title,
 			link: video.href,
-			thumbnailSrc: thumbnail.src,
+			thumbnail: thumbnail.src,
 			duration: duration.innerText
 		})
 	}
