@@ -17,17 +17,20 @@ function getData() {
 	const videoElms = document.querySelectorAll("#container.style-scope.ytd-playlist-video-renderer")
 	let videos = []
 	for (let elm of videoElms) {
-		const channelElm = elm.querySelector(".ytd-channel-name a")
-		const videoElm = elm.querySelector("a#video-title")
+		const channel = elm.querySelector(".ytd-channel-name a")
+		const video = elm.querySelector("a#video-title")
 		const thumbnail = elm.querySelector("img")
+		const duration = elm.querySelector("ytd-thumbnail-overlay-time-status-renderer")
 		videos.push({
-			channel: { link: channelElm.href, name: channelElm.innerText },
-			title: videoElm.title,
-			link: videoElm.href,
-			thumbnailSrc: thumbnail.src
+			channel: { link: channel.href, name: channel.innerText },
+			title: video.title,
+			link: video.href,
+			thumbnailSrc: thumbnail.src,
+			duration: duration.innerText
 		})
 	}
-	console.log(`Saved ${videos.length} videos`)
+	copy(videos)
+	console.log(`We copied ${videos.length} videos to your clipboard`)
 	window.videos = videos
 	return videos
 }
@@ -38,7 +41,3 @@ const observer = new MutationObserver(debounce(function(mutationsList, observer)
 }));
 
 observer.observe(document.querySelector("#contents"), { attributes: true, childList: true, subtree: true });
-
-function saveVideosToClipboard() {
-	copy(window.videos)
-}
