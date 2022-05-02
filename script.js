@@ -15,7 +15,7 @@ function saveVideosInfoToClipboard() {
 		})
 	}
 	copy(videos)
-	console.log(`We copied ${videos.length} videos to buffer`)
+	console.log(`We copied ${videos.length} videos to your clipboard`)
 	window.videos = videos
 	return videos
 }
